@@ -6,17 +6,18 @@
 #
 
 library(shiny)
+source('MontyHall.R')  #MontyHallStrat() function
 
 shinyServer(function(input, output) {
-   
-  output$distPlot <- renderPlot({
+  # generate values based on input$____ from ui.R   
+  x <- MontyHallStrat(games = input$games, doors = input$doors, strategy = input$strategy, set.seed = 1)
+  
+  output$stratPlot <- renderPlot({ 
     
-    # generate bins based on input$bins from ui.R
-    x    <- faithful[, 2] 
-    bins <- seq(min(x), max(x), length.out = input$bins + 1)
+    #par(xpd=F) # keep abline inside plot frame
+    #par(mfrow=c(1,1))
+    plot(x,type='l',main=paste("Mean After",games,"Games :",m),ylab="probability",lwd=2,ylim=c(0,1));abline(h= 2/3, col='red')
     
-    # draw the histogram with the specified number of bins
-    hist(x, breaks = bins, col = 'darkgray', border = 'white')
     
   })
   

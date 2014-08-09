@@ -1,17 +1,16 @@
 MontyHallStrat <- function(games,             #number of games
                            doors=3,           #number of doors
                            strategy="switch", # {switch, random, stay}
-                           set.seed=1,        #for reproducibility
-                           plot=F             #logical to plot cumu avg
+                           set.seed=1        #for reproducibility
 ) {
   set.seed(set.seed)
   # contestant chooses door:
   x1 <- sample(x = 1:doors, size = games, replace = T)
   # car behind door:
   x2 <- sample(x = 1:doors, size = games, replace = T)
-  x3 <- rep(NA,games)  # vec to record door contestant switches to
-  x4 <- rep(NA,games)  # vec to record if contestant wins
-  r <- rep(NA,games)   # vec to record door removed (opened) by Monty Hall
+  x3 <- numeric(games)  # vec to record door contestant switches to
+  x4 <- numeric(games)  # vec to record if contestant wins
+  r <- numeric(games)   # vec to record door removed (opened) by Monty Hall
   x <- rbind(x1,x2,x3,x4,r)
   d <- 1:doors  #door list
   
@@ -68,14 +67,11 @@ MontyHallStrat <- function(games,             #number of games
   for (i in 1:dim(x)[2]){
     vec[i] <- mean(x[4,1:i])
   }
-  
-  if (plot) {
-    par(xpd=F) # keep abline inside plot frame
-    par(mfrow=c(1,1))
-    plot(vec,type='l',main=paste("Mean After",games,"Games :",m),ylab="probability",lwd=2,ylim=c(0,1));abline(h= 2/3, col='red')
-  }
-  
-  return(list(mean=m,cumu.avg=vec,data.frame=x))
+   #  par(xpd=F) # keep abline inside plot frame
+   # par(mfrow=c(1,1))
+   # plot(vec,type='l',main=paste("Mean After",games,"Games :",m),ylab="probability",lwd=2,ylim=c(0,1));abline(h= 2/3, col='red')
+  return(vec)
+  #return(list(mean=m,cumu.avg=vec,data.frame=x))
 } #end function
 
 
