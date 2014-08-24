@@ -11,8 +11,7 @@ source('MontyHall.R')
 shinyServer(function(input, output) {
   
   output$stratPlot <- renderPlot({
-    
-    # generate bins based on input$bins from ui.R
+  
     g <- input$games
     #     d <- as.numeric(input$doors)
     d <- 3  # address number or doors in later shiny app
