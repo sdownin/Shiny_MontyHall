@@ -14,7 +14,7 @@ shinyServer(function(input, output) {
   
     g <- input$games
     #     d <- as.numeric(input$doors)
-    d <- 3  # address number or doors in later shiny app
+    d <- 3  # address number or doors here
     x    <- MontyHallStrat(games = g,doors = d,strategy = input$strategy,set.seed = 1) 
     
     # draw the histogram with the specified number of bins
